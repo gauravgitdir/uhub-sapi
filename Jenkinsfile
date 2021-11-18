@@ -1,27 +1,31 @@
 pipeline {
   agent any
   stages {
-    stage('Build Application') {
+    stage('Build Application') { 
       steps {
-        bat ' clean install'
+        bat 'mvn clean install'
       }
     }
-    stage('Test') {
+ 	stage('Test') { 
       steps {
-        echo ' Application in Testing Phase…'
-        bat ' test'
+        echo 'Test Appplication...' 
+        bat 'mvn test'
       }
     }
-    stage('Deployment') {
+ 	
+   
+	stage('Deployment') { 
       environment {
         ENVIRONMENT = 'dev'
         APP_NAME = 'uho-dev-sapi'
       }
+            
       steps {
-        echo ' Deploying mule project due to the latest code commit…'
-        echo ' Deploying to the configured environment….'
-        bat ' clean package deploy -Pdev -DmuleDeploy -Dusername=mani_uho -Dpassword=Manimani1 -Denc.key=qwerty987654321 -Danypoint.platform.client_id=b5380b80479645308fa3c1853e314501 -Danypoint.platform.client_secret=248844e0C9124EAfa4eE6ceAE070d752 ' 
+        echo 'Deploying only because of code commit...'
+        echo 'Deploying to  dev environent....'
+        bat 'mvn package deploy -DmuleDeploy -Dusername=mani_uho -Dpassword=Manimani1 -Denc.key=qwerty987654321 -Danypoint.platform.client_id=b5380b80479645308fa3c1853e314501 -Danypoint.platform.client_secret=248844e0C9124EAfa4eE6ceAE070d752'
       }
-    }
+	  
+	}
   }
 }
