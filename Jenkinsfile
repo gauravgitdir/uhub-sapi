@@ -49,13 +49,16 @@ stages {
 
          environment {
         ANYPOINT_CREDENTIALS = credentials('anypointPlatform')
+          CLOUDHUB_ENV = credentials('dev')
+		ANYPOINT_USERNAME_DEV = credentials('ANYPOINT_USERNAME_DEV')
+		ANYPOINT_PASSWORD_DEV = credentials('ANYPOINT_PASSWORD_DEV')
       }
 
 
     steps {
 
 
-      bat 'mvn clean package deploy -DmuleDeploy -Pdev -Dusername=${anypointPlatform} -Dpassword=${anypointPlatform} -Denc.key=${Denc.key} -Danypoint.platform.client_id=${Danypoint.platform.client_id} -Danypoint.platform.client_secret=${Danypoint.platform.client_secret}'
+      bat 'mvn clean package deploy -DmuleDeploy -Pdev -Dusername=${ANYPOINT_USERNAME_DEV} -Dpassword=${ANYPOINT_PASSWORD_DEV} -Denc.key=${Denc.key} -Danypoint.platform.client_id=${Danypoint.platform.client_id} -Danypoint.platform.client_secret=${Danypoint.platform.client_secret}'
 
 
     }
